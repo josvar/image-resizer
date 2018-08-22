@@ -2,8 +2,8 @@
   "name": "@josvar/image-resizer",
   "version": "0.1.0",
   "description": "Image resizer",
-  "main": "dist/index.js",
-  "jsnext:main": "src/index.js",
+  "main": "lib/cli.js",
+  "bin": "lib/cli.js",
   "scripts": {
     "prebabelify": "rimraf lib",
     "babelify": "babel src --out-dir lib",
@@ -52,5 +52,12 @@
   },
   "engines": {
     "node": ">=6.9.0"
+  },
+  "dependencies": {
+    "commander": "^2.16.0",
+    "fs-extra": "^6.0.1",
+    "glob": "^7.1.2",
+    "lodash": "^4.17.10",
+    "sharp": "^0.20.7"
   }
 }
