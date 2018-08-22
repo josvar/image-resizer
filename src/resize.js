@@ -19,7 +19,7 @@ function resolveOutputFilename(name, tokens) {
     name = name.replace(tokenObj.regex, tokenObj.value)
   })
 
-  return name
+  return name.toLowerCase()
 }
 
 function resolveSize(sizeConfig) {
