@@ -11,7 +11,7 @@ PSRs you support to avoid any confusion with users and contributors.
 You can install the package via yarn:
 
 ```bash
-$ yarn add image-resizer
+$ npm i @josvar/image-resizer
 ```
 
 ## Usage
