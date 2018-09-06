@@ -16,8 +16,6 @@ program
   .action((filename = 'images.config.js') => {
     let destination = path.resolve(filename)
 
-    console.log(destination)
-
     if (!path.extname(filename).includes('.js')) {
       destination += '.js'
     }
