@@ -59,6 +59,11 @@ program
       process.exit(1)
     }
 
+    console.warn(`Using config file: ${configPath}`)
+    console.warn(`Using input folder: ${input}`)
+    console.warn(`Using output folder: ${output}`)
+    console.warn(`Using preset: ${preset}`)
+
     resize(input, output, presetConfig)
   })
 
