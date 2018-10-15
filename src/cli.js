@@ -39,36 +39,30 @@ program
   .option('-i, --input <path>', 'Input file or folder')
   .option('-o, --output <path>', 'Output file or folder')
   .action((trash, options) => {
-    let config = options.config
-    if (!config) {
-      console.error(`Missing config [-c] option, aborting.`)
-      process.exit(1)
+    const defaultOptions = {
+      config: './images.config.js',
+      input: './input',
+      output: './output',
+      preset: 'default',
     }
-    config = require(path.resolve(options.config))
 
-    const preset = options.preset
-    if (!preset) {
-      console.error(`Missing preset [-p] option, aborting.`)
-      process.exit(1)
-    }
+    const configPath = options.config || defaultOptions.config
+
+    const config = require(path.resolve(configPath))
+    const preset = options.preset || defaultOptions.preset
     const presetConfig = config.presets[preset]
-
-    const input = options.input
-    if (!input) {
-      console.error(`Missing input [-i] option, aborting.`)
-      process.exit(1)
-    }
-
-    const output = options.output
-    if (!output) {
-      console.error(`Missing output [-o] option, aborting.`)
-      process.exit(1)
-    }
+    const input = options.input || defaultOptions.input
+    const output = options.output || defaultOptions.output
 
     if (!presetConfig) {
       console.error(`Preset ${preset} does not exists, aborting.`)
       process.exit(1)
     }
+
+    console.warn(`Using config file: ${configPath}`)
+    console.warn(`Using input folder: ${input}`)
+    console.warn(`Using output folder: ${output}`)
+    console.warn(`Using preset: ${preset}`)
 
     resize(input, output, presetConfig)
   })
