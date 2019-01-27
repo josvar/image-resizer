@@ -27,7 +27,8 @@
   },
   "homepage": "https://github.com/josvar/image-resizer",
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "config.stub.js"
   ],
   "devDependencies": {
     "babel-cli": "^6.26.0",
