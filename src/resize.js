@@ -1,6 +1,7 @@
 import sharp from 'sharp'
 import path from 'path'
 import _ from 'lodash'
+import uuidv4 from 'uuid/v4'
 
 function resolveTokens(size, filepath) {
   let parsedFilepath = path.parse(filepath)
@@ -11,6 +12,7 @@ function resolveTokens(size, filepath) {
     { regex: /\[n\]/g, value: parsedFilepath.name || '' },
     { regex: /\[e\]/g, value: parsedFilepath.ext || '' },
     { regex: /\[b\]/g, value: parsedFilepath.base || '' },
+    { regex: /\[uuid\]/g, value: uuidv4() },
   ]
 }
 
@@ -53,13 +55,15 @@ const resize = (filepath, output, config) => {
   sizesConfig.forEach(sizeConfig => {
     let size = resolveSize(sizeConfig)
     let name = sizeConfig.name || config.name || '[b]'
+    let jpegOptions = sizeConfig.jpeg || config.jpeg || null
+    let resizeOptions = sizeConfig.resize || config.resize || null
 
     const outputFilename = resolveOutputFilename(name, resolveTokens(size, filepath))
 
     let sharpedFile = sharp(path.resolve(filepath))
 
-    sharpedFile.resize(size.w, size.h)
-    sharpedFile.jpeg(Object.assign({ quality: 85, progressive: true }, config.jpeg))
+    sharpedFile.resize(size.w, size.h, resizeOptions)
+    sharpedFile.jpeg(Object.assign({ quality: 85, progressive: true }, jpegOptions))
     sharpedFile.toFile(path.resolve(output, outputFilename), (err, info) => {})
   })
 }
