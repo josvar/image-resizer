@@ -58,6 +58,10 @@ const resize = (filepath, output, config) => {
     let jpegOptions = sizeConfig.jpeg || config.jpeg || null
     let resizeOptions = sizeConfig.resize || config.resize || null
 
+    if (_.isFunction(name)) {
+      name = name(filepath)
+    }
+
     const outputFilename = resolveOutputFilename(name, resolveTokens(size, filepath))
 
     let sharpedFile = sharp(path.resolve(filepath))
