@@ -56,7 +56,7 @@ const resize = (filepath, output, config) => {
     let size = resolveSize(sizeConfig)
     let name = sizeConfig.name || config.name || '[b]'
     let jpegOptions = sizeConfig.jpeg || config.jpeg || null
-    let resizeOptions = sizeConfig.resize || config.resize || null
+    let resizeOptions = sizeConfig.resize || config.resize || {}
 
     if (_.isFunction(name)) {
       name = name(filepath)
